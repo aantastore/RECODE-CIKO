@@ -46,20 +46,24 @@ const { removeBackgroundFromImageFile } = require('remove.bg')
 const { fetchJosn, fetchText } = require('./lib/fetcher')
 const { color, bgcolor } = require('./lib/color')
 const { y2mateA, y2mateV } = require('./lib/y2mate.js')
+const { covid } = require("./lib/covid.js");
 const { wait, getBuffer, h2k, generateMessageID, getGroupAdmins, getRandom, start, info, success, close } = require('./lib/functions')
 const { owner, 
         botname, 
         ownername, 
         cikopi,
         hardiapi,
-        cikoapi } = JSON.parse(fs.readFileSync('./setting.json'))
+        cikoapi,
+        Instagram,
+        github,
+        yutub } = JSON.parse(fs.readFileSync('./setting.json'))
 //━━━━━━━━━━━━━━━[ DATABASE ]━━━━━━━━━━━━━━━━━//
 
 const _antilink = JSON.parse(fs.readFileSync('./database/antilink.json'))
 const _antivirtex = JSON.parse(fs.readFileSync('./database/antivirtex.json'))
 const nsfww = JSON.parse(fs.readFileSync('./database/nsfww.json'))
-
-
+const cikomode = JSON.parse(fs.readFileSync('./database/cikomode.json'))
+const caklontong = JSON.parse(fs.readFileSync('./Arin/caklontong.json'))
 module.exports = fdhl = async (fdhl, mek, _welkom) => {
 	try {
         if (!mek.hasNewMessage) return
@@ -100,13 +104,38 @@ module.exports = fdhl = async (fdhl, mek, _welkom) => {
 		const conts = mek.key.fromMe ? fdhl.user.jid : fdhl.contacts[sender] || { notify: jid.replace(/@.+/, '') }
         const pushname = mek.key.fromMe ? fdhl.user.name : conts.notify || conts.vname || conts.name || '-'
         
+        const copid = await covid()
 		const isAntiLink = isGroup ? _antilink.includes(from) : false
 		const isWelkom = isGroup ? _welkom.includes(from) : false
 		const isAntiVirtex = isGroup ? _antivirtex.includes(from) : false
 	    const isNsfw = isGroup ? nsfww.includes(from) : false
+	    const isCikmod = isGroup ? cikomode.includes(from) : false
 		const isOwner = ownerNumber.includes(sender)
 		const isMybot = isOwner || mek.key.fromMe
-		
+		//INI TIME TOD
+		const timeWib = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
+        const timeWita = moment().tz('Asia/Makassar').format('DD/MM HH:mm:ss')
+        const timeWit = moment().tz('Asia/Jayapura').format('DD/MM HH:mm:ss')
+        const jam = moment().tz("Asia/Jakarta").format("HH:mm:ss");
+        const wita = moment.tz("Asia/Makassar").format("HH:mm:ss");
+        const wit = moment.tz("Asia/Jayapura").format("HH:mm:ss");
+    let locale = "id";
+    let d = new Date();
+    let gmt = new Date(0).getTime() - new Date("1 January 1970").getTime();
+    let weton = ["Pahing", "Pon", "Wage", "Kliwon", "Legi"][
+      Math.floor((d * 1 + gmt) / 84600000) % 5
+    ];
+    let date = d.toLocaleDateString(locale, {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    let week = d.toLocaleDateString(locale, { weekday: "long" });
+    let waktu = d.toLocaleDateString(locale, {
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    });
 //━━━━━━━━━━━━━━━[ CONNECTION 1 ]━━━━━━━━━━━━━━━━━//
 
 		mess = {
@@ -121,7 +150,7 @@ module.exports = fdhl = async (fdhl, mek, _welkom) => {
 				group: 'Khusus Group Kak!'
 			}
 		}
-		faketeks = 'Fadhil Graphy'
+		faketeks = 'BY LORD PEBRI!!'
             const isUrl = (ini) => {
                 return ini_url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
             }
@@ -193,6 +222,7 @@ module.exports = fdhl = async (fdhl, mek, _welkom) => {
         }
         //sendButLoc(id/from, "string", "string", image, but, mek)
          function _0x49e8(){const _0x2abf1f=['128458zaqRph','15LuvETp','32FoIOpf','By\x20:\x20Prassz','307917pLgBPR','Zerobot~Prassz','127514DLEruK','2301110zFGGkR','11iUrhyl','5IBSTLg','sendMessage','2099160NwtLDQ','672988HpVyoZ','1059558OLmAKI'];_0x49e8=function(){return _0x2abf1f;};return _0x49e8();}(function(_0x4b5fea,_0xcd96a7){const _0xd54c3c=_0x9a06,_0x555513=_0x4b5fea();while(!![]){try{const _0x4e06eb=parseInt(_0xd54c3c(0x12b))/0x1+parseInt(_0xd54c3c(0x123))/0x2*(parseInt(_0xd54c3c(0x12c))/0x3)+-parseInt(_0xd54c3c(0x129))/0x4*(parseInt(_0xd54c3c(0x126))/0x5)+-parseInt(_0xd54c3c(0x12a))/0x6+-parseInt(_0xd54c3c(0x128))/0x7+parseInt(_0xd54c3c(0x12d))/0x8*(parseInt(_0xd54c3c(0x12f))/0x9)+-parseInt(_0xd54c3c(0x124))/0xa*(-parseInt(_0xd54c3c(0x125))/0xb);if(_0x4e06eb===_0xcd96a7)break;else _0x555513['push'](_0x555513['shift']());}catch(_0x5da84c){_0x555513['push'](_0x555513['shift']());}}}(_0x49e8,0x2960e));function _0x9a06(_0x41e8cb,_0x44ab09){const _0x49e8d9=_0x49e8();return _0x9a06=function(_0x9a063c,_0x40f3e3){_0x9a063c=_0x9a063c-0x123;let _0x55b451=_0x49e8d9[_0x9a063c];return _0x55b451;},_0x9a06(_0x41e8cb,_0x44ab09);}const sendButLoc=async(_0x151338,_0x56cd7c,_0x33ce1f,_0xbff411,_0x1ecc85,_0x40a38d)=>{const _0xf018e3=_0x9a06;return buttonMessagesL={'contentText':_0x56cd7c,'footerText':_0x33ce1f,'buttons':_0x1ecc85,'headerType':0x6,'locationMessage':{'degreesLatitude':0x0,'degreesLongitude':0x0,'name':_0xf018e3(0x130),'address':_0xf018e3(0x12e),'jpegThumbnail':_0xbff411}},fdhl[_0xf018e3(0x127)](_0x151338,buttonMessagesL,buttonsMessage,{'quoted':_0x40a38d});};
+
 
 
 const sendFile = async (medya, namefile, capti, tag, vn) => {
@@ -283,8 +313,8 @@ const sendFile = async (medya, namefile, capti, tag, vn) => {
                             itemCount : 111,
                             status: 1,
                             surface : 1,
-                            message: `CikoBot Whastapp Asisten\nStatus Online✓ Prefix [ # ]`, 
-                            orderTitle: `CikoBot WhatsApp Asisten\nStatus Online✓ Prefix [ # ]`,
+                            message: `CIKOBOT ${command}`, 
+                            orderTitle: `CIKOBOT ${command}`,
                             thumbnail: nigambar,
                             sellerJid: '0@s.whatsapp.net' 
                           }
@@ -366,10 +396,30 @@ if (budy.includes(`Hi ciko`)) {
 
 reply(`Hallo Kak *${pushname}😁*\nAda Yang Bisa Ciko Bantu?\nKetik #menu Kak Untuk Mulai Menggunakan CikoBot`)
 }
-/*if (budy.includes(`.`)) {
+/*if (budy.includes(``)) {
 await fdhl.updatePresence(from, Presence.composing)
-                        simi = await fetchJson(`https://api.lolhuman.xyz/api/simi?apikey=${cikoapi}&text=${budy}`)
-                        reply(simi.result)*/
+                        simi = await fetchJson(`https://api.lolhuman.xyz/api/simi?apikey=${cikoapi}&text=${budy}`)*/
+ 
+const time2 = moment().tz("Asia/Makassar").format("HH:mm:ss");
+    if (time2 < "24:59:00") {
+      var ucapanWaktu = "Selamat malam";
+    }
+    if (time2 < "19:00:00") {
+      var ucapanWaktu = "Selamat senja🌞";
+    }
+    if (time2 < "18:00:00") {
+      var ucapanWaktu = "Selamat sore🌄";
+    }
+    if (time2 < "15:00:00") {
+      var ucapanWaktu = "Selamat siang☀️";
+    }
+    if (time2 < "11:00:00") {
+      var ucapanWaktu = "Selamat pagi🌅";
+    }
+    if (time2 < "05:00:00") {
+      var ucapanWaktu = "Selamat malam🌃";
+    }
+//»»»»»»»»»»»»»»»»»»»»»»|| FEBZ ||«««««««««««««««««««««««//
 
 		colors = ['red', 'white', 'black', 'blue', 'yellow', 'green']
 		const isMedia = (type === 'imageMessage' || type === 'videoMessage')
@@ -607,8 +657,39 @@ switch (command) {
 						reply('Sukses menonaktifkan fitur nsfw')
 					} else {
 						reply('1 untuk mengaktifkan, 0 untuk mematikan')
-					}
+					}											
 					break
+					
+//»»»»»»»»»»»»»»»»»»»»»»|| INI CIKO MODE ||«««««««««««««««««««««««//	
+
+     case 'cikomodex' :
+         if (!isGroup) return reply(mess.only.group)
+         if (!isOwner) return reply('LU BUKAN OWNER GBLOK')
+         but = [
+         { buttonId: '#cikomodexon', buttonText: { displayText: 'ON' }, type: 1 },
+         { buttonId: '#cikomodexoff', buttonText: { displayText: 'OFF' }, type: 1 }
+         ]
+         sendButton(from, "*SILAHKAN PILIH UNTUK CIKO MODE X*", faketeks, but, {quoted: mek})
+         break
+     case 'cikomodexon' :
+         if (!isGroup) return reply(mess.only.group)
+         if (!isOwner) return reply('LU BUKAN OWNER GBLOK')
+         if (isCikmod) return reply('CIKO MODE X AKTIF!!')
+         cikomode.push(from)
+         fs.writeFileSync('./database/cikomode.json', JSON.stringify(cikomode))
+         reply(`\`\`\`SUKSES MENGAKTIFKAN CIKO MODE X DI GROUP\`\`\` *${groupMetadata.subject}*`)
+         break
+     case 'cikomodexoff' :
+         if (!isGroup) return reply(mess.only.group)
+         if (!isOwner) return reply('LU BUKAN OWNER GBLOK')
+         if (!isCikmod) return reply('CIKO MODE X SUDAH AKTIF SEBELUMNYA!')
+         cikomode.splice(from, 1)
+         fs.writeFileSync('./database/cikomode.json', JSON.stringify(cikomode))
+         reply(`\`\`\`SUKSES MENONAKTIFKAN CIKO MODE X DI GROUP\`\`\` *${groupMetadata.subject}*`)
+         break
+
+//»»»»»»»»»»»»»»»»»»»»»»|| INI WM GW TOD : FEBZ ||«««««««««««««««««««««««//								
+					
                 case 'ytplay':
                 case 'play':
                     if (args.length == 0) return await reply(`Example: ${prefix + command} melukis senja`)
@@ -628,7 +709,15 @@ switch (command) {
                     break					
 					
 //»»»»»»»»»»»»»»»»»»»»»»|| menu + fake reply ||«««««««««««««««««««««««//
-            case 'menu':
+
+            
+               /*    case'menu':
+                   inimenu = `Hy Kak ${pushname}👋😁
+*/
+                                
+                                          
+                    case 'allmenu':
+                    case 'menu':
                     var punya_wa = "0@s.whatsapp.net"
                     var ini_text = "𝗖𝗜𝗞𝗢𝗕𝗢𝗧 𝗠𝗘𝗡𝗨\n‣ Info ciko : status online\n‣ Rating : ★★★★☆"
                     var ini_buffer = fs.readFileSync ('./Arin/fdhlgrphy.jpg')
@@ -645,9 +734,21 @@ switch (command) {
                             }
                         }
                     }            
-menu2 = `Hi kak *@${pushname}*
+menu2 = `Hi kak @${pushname}👋${ucapanWaktu}😁
 ┌━━━━━━━━━━━━━━━━━━━━┈
-│ *⦿ Bot Prefix :* ${prefix}
+│ ≡ *WAKTU INDONESIA*
+*│⏰Wib :* ${jam}
+*│⏰Wita :* ${wita}
+*│⏰Wit :* ${wit}
+│ ≡ *INFO ${botname}*
+*│⚙️️Pefix :* Multi = ${prefix}
+*│💌Instagram :* ${Instagram}
+*│📸YouTube :* ${yutub}
+*│🗃️Github :* ${github}
+│≡ *INFO COVID🦠*
+*│💔Terinfeksi :* ${copid[0].kasus}
+*│☠️Kematian :* ${copid[0].kematian}
+*│💚Sembuh :* ${copid[0].sembuh}
 │ *⦿ Owner :*  ${ownername}
 │ *⦿ Status :* Online
 │ *⦿ Deks :* Jan Lupa Donasi!
@@ -667,6 +768,7 @@ menu2 = `Hi kak *@${pushname}*
 	◈ ${prefix}setdesc
 	◈ ${prefix}setname
 	◈ ${prefix}hidetag
+	◈ ${prefix}hentaimenu
 	
  ❑Sticker Menu
 	◈ ${prefix}attp
@@ -718,18 +820,6 @@ menu2 = `Hi kak *@${pushname}*
 	◈ ${prefix}hanime
 	◈ ${prefix}waifusearch
 	◈ ${prefix}wpanime3
-	
-  ❑Hentai Menu
-	◈ ${prefix}neko
-	◈ ${prefix}neko2
-	◈ ${prefix}neko3
-	◈ ${prefix}hentai
-	◈ ${prefix}hentai2	
-	◈ ${prefix}anal
-	◈ ${prefix}yuri
-	◈ ${prefix}trap
-	◈ ${prefix}solo
-	◈ ${prefix}erochan
 	
   ❑Primbon Menu
 	◈ ${prefix}artinama
@@ -818,25 +908,49 @@ menu2 = `Hi kak *@${pushname}*
   	◈ ${prefix}steel3d  
 	◈ ${prefix}wallgravity 
 
-Note : Fitur Masih Dikit Karena Masih Beta
-Jangan Lupa Subscribe author di bawah!!
-
-©Fadhil Graphy
-©Pebkun`                  
-		truteh = fs.readFileSync ('./Arin/fdhlgrphy.jpg')
+    ≡ *Credits by*
+▢ @LordPebrikun
+▢ @FadhilGraphy`            
 		await fdhl.sendMessage(from, menu2, text, ini_csreply)
 		break
 
+case 'hentaimenu':
+if (!isGroup) return reply(mess.only.group)
+if (!isNsfw) return reply(`Fitur Nsfw Belum Aktif Di Grup Ini\nKetik: ${prefix}nsfw 1 \nUntuk aktif`)
+inibuf = await getBuffer(`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4tP28zi7qOBD1FWIJn8moQETUnSvT3AL0Qg&usqp=CAU`)
+const text1 =`≡ *GEGE LU NGAB GK TAKUT DOSA!!*
+
+Ibnu Katsir rahimahullah berkata,
+
+هذا أمر من الله تعالى لعباده المؤمنين أن يغضوا من أبصارهم عما حرم عليهم، فلا ينظروا إلا إلى ما أباح لهم النظر إليه ، وأن يغضوا أبصارهم عن المحارم
+Artinya :
+“Ini adalah perintah dari Allah Ta’ala kepada hamba-hambaNya yang beriman untuk menjaga (menahan) pandangan mereka dari hal-hal yang diharamkan atas mereka. Maka janganlah memandang kecuali memandang kepada hal-hal yang diperbolehkan untuk dipandang. Dan tahanlah pandanganmu dari hal-hal yang diharamkan.”
+
+DOSA TANGGUNG SENDIRI!!
+	
+  ❑Hentai Menu
+	◈ ${prefix}neko
+	◈ ${prefix}neko2
+	◈ ${prefix}neko3
+	◈ ${prefix}hentai
+	◈ ${prefix}hentai2	
+	◈ ${prefix}anal
+	◈ ${prefix}yuri
+	◈ ${prefix}trap
+	◈ ${prefix}solo
+	◈ ${prefix}erochan`
+     fdhl.sendMessage(from, inibuf, image, { caption: text1, quoted: mek })
+     break
 case 'sewabot':
       txtj = `*Hallo Kak ${pushname}*
 *Untuk Menyewa Bot Silahkan Lihat*
-*List🏷️Harga Berikut🛒📌*
+*List🔖Harga Berikut🛒📌*
 
 *[ DAFTAR HARGA SEWA BOT🛒 ]*
-*🏷️SEMINGGU : 5k*
-*🏷️SEBULAN : 10k*
-*🏷️PERMANEN : 15k*
-*🏷️PERMANEN+VIP : 20k*
+*🔖️SEMINGGU : 5k*
+*🔖️SEBULAN : 10k*
+*🔖️PERMANEN : 15k*
+*🔖️PERMANEN+VIP : 20k*
 
 *Jika Tertarik Silahkan Hubungi Owner*
 *Dengan Ketik ${prefix}owner*
@@ -845,6 +959,71 @@ case 'sewabot':
 https://wa.me/qr/7BT35T32O3YBO1`
 reply(txtj)
 break
+
+case 'menu2':
+ listMsg = {
+ buttonText: '𝗟𝗜𝗦𝗧 𝗠𝗘𝗡𝗨',
+ footerText: 'PEBZKUN',
+ description: `Hai kak @${sender.split('@')[0]}, Silahkan pilih menu disini`,
+ sections: [
+                     {
+                      "title": `${ownername} - ${botname}`,
+ rows: [
+                          {
+                              "title": "menu",
+                              "rowId": ""
+                           },
+                           {
+                              "title": "Speed",
+                              "rowId": ""
+                           },
+                           {
+                              "title": "Status",
+                              "rowId": ""
+                           },
+                           {
+                              "title": "Creator",
+                              "rowId": ""
+                           },
+                           {
+                              "title": "Jadibot",
+                              "rowId": ""
+                           },
+                           {
+                              "title": "Runtime",
+                              "rowId": ""
+                           },
+                           {
+                              "title": "OwnerMenu",
+                              "rowId": ""
+                           },
+                           {
+                              "title": "MakerMenu",
+                              "rowId": ""
+                           },
+                           {
+                              "title": "GroupMenu",
+                              "rowId": ""
+                           },
+                           {
+                              "title": "OtherMenu",
+                              "rowId": ""
+                           },
+                           {
+                              "title": "DownloadMenu",
+                              "rowId": "d"
+                           },
+                           {
+                              "title": "UpswMenu",
+                              "rowId": ""
+                           }
+                        ]
+                     }],
+ listType: 1
+}
+fdhl.sendMessage(from, listMsg, MessageType.listMessage, {contextInfo: { mentionedJid: [sender]},quoted:ftrol})
+break
+
 //»»»»»»»»»»»»»»»»»»»»»»|| MUSLIM MENU ||«««««««««««««««««««««««//
 
 case 'kisahnabi':
@@ -890,8 +1069,6 @@ reply(`*Niat Sholat ${teks}*\n\n`+peb)
 break
 										
 //┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅〔 FUN MENU〕┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅//		
-		
-	        	break
 	        	
             case 'truth':
             case 'trut':
@@ -926,7 +1103,7 @@ if (!isGroup) return reply(mess.only.group)
   gan = q
   cek = `Target : *${gan}*
 Persentase : ${random}%`
-pebkun.sendMessage(from, cek, text, {quoted: mek})
+fdhl.sendMessage(from, cek, text, {quoted: mek})
 break
 
 //--- cantik cek
@@ -937,7 +1114,7 @@ if (!isGroup) return reply(mess.only.group)
   can = q
   cek = `Target : *${can}*
 Persentase : ${random}%`
-pebkun.sendMessage(from, cek, text, {quoted: mek})
+fdhl.sendMessage(from, cek, text, {quoted: mek})
 break
 
 //--- apakah
@@ -1635,7 +1812,7 @@ break
          exec(`ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${ranw}`, (err) => {
          fs.unlinkSync(ranp)
          if (err) return reply(mess.error.stick)
-         fdhl.sendMessage(from, fs.readFileSync(ranw), sticker, { quoted: ftrol })
+         fdhl.sendMessage(from, fs.readFileSync(ranw), sticker, { quoted: mek })
          fs.unlinkSync(ranw)
          })
          })
